@@ -17,8 +17,8 @@ const Produto = () => {
           navigation.setOptions({title: i === 0 ? "INFORMAÇÕES" : "COMENTÁRIOS"})}>
         <Tab
           heading={
-            <TabHeading style={{ backgroundColor: Tema.BRANCO }}>
-              <Icon type="FontAwesome" name="file-text" style={{ color: Tema.ROXO, fontSize: 22 }}/>
+            <TabHeading style={{ backgroundColor: Tema.BRANCO , flexDirection: "column"}}>
+              <Icon type="FontAwesome" name="file-text" style={{ color: Tema.ROXO, fontSize: 21 }}/>
               <Text style={{ color: Tema.ROXO }}>Informações</Text>
             </TabHeading>
           }>
@@ -26,8 +26,8 @@ const Produto = () => {
         </Tab>
         <Tab
           heading={
-            <TabHeading style={{ backgroundColor: Tema.BRANCO }}>
-              <Icon type="FontAwesome" name="commenting" style={{ color: Tema.ROXO, fontSize: 25 }}/>
+            <TabHeading style={{ backgroundColor: Tema.BRANCO , flexDirection: "column"}}>
+              <Icon type="FontAwesome" name="commenting" style={{ color: Tema.ROXO, fontSize: 22 }}/>
               <Text style={{ color: Tema.ROXO }}>Comentários</Text>
             </TabHeading>
           }>

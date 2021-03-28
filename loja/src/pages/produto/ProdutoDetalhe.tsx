@@ -64,10 +64,13 @@ const styles = StyleSheet.create({
     textTransform: "capitalize",
     fontWeight: "bold",
     margin: 20,
+    color: Tema.CINZA_ESCURO_HEADER
+
   },
   descricao: {
     fontSize: moderateScale(15, 0.5),
     textAlign: "justify",
     margin: 30,
+    color: Tema.CINZA_ESCURO_TEXTO
   },
 });
