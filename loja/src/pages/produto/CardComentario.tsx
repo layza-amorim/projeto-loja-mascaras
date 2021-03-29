@@ -1,9 +1,9 @@
-import React from "react";
-import { Image, Text, View, StyleSheet } from "react-native";
-import { moderateScale } from "react-native-size-matters";
-import { Comentario } from "../../models/dto/Comentario";
-import { Tema } from "../../styles/styles";
-import Star from "../../components/Star";
+import React from 'react';
+import { Image, Text, View, StyleSheet } from 'react-native';
+import { moderateScale } from 'react-native-size-matters';
+import { Comentario } from '../../models/dto/Comentario';
+import { Tema } from '../../styles/styles';
+import Star from '../../components/Star';
 
 interface Props {
   comentario: Comentario;
@@ -32,10 +32,10 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderColor: Tema.ROXO,
     borderWidth: 2,
-    flexDirection: "row",
+    flexDirection: 'row'
   },
   imagem: { width: 120, height: 120, marginRight: 15 },
-  descricao: { flex: 1, justifyContent: "space-around" },
-  titulo: { fontSize: moderateScale(16, 0.5), fontWeight: "bold" },
-  comentario: { fontSize: moderateScale(14, 0.5), textAlign: "justify" },
+  descricao: { flex: 1, justifyContent: 'space-around' },
+  titulo: { fontSize: moderateScale(16, 0.5), fontWeight: 'bold' },
+  comentario: { fontSize: moderateScale(14, 0.5), textAlign: 'justify' }
 });

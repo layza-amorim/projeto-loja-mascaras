@@ -1,6 +1,6 @@
-import React from "react";
-import { Icon, Input, View } from "native-base";
-import { Tema } from "../styles/styles";
+import React from 'react';
+import { Icon, Input, View } from 'native-base';
+import { Tema } from '../styles/styles';
 
 interface Props {
   placeholder: string;
@@ -17,14 +17,13 @@ export default function SearchBar({ placeholder, onEndEditing }: Props) {
         paddingHorizontal: 10,
         borderWidth: 0.5,
         borderColor: Tema.CINZA_ESCURO,
-        flexDirection: "row",
-        alignItems: "center",
-      }}
-    >
+        flexDirection: 'row',
+        alignItems: 'center'
+      }}>
       <Icon style={{ color: Tema.ROXO }} name="ios-search" />
       <Input
         style={{ marginLeft: 5, fontSize: 14 }}
-        onEndEditing={(event) => onEndEditing(event.nativeEvent.text)}
+        onEndEditing={event => onEndEditing(event.nativeEvent.text)}
         placeholderTextColor={Tema.CINZA_ESCURO_TEXTO}
         placeholder={placeholder}
       />

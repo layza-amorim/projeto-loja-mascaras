@@ -1,8 +1,8 @@
-import React from "react";
-import { Image, Text, TouchableOpacity, View, StyleSheet } from "react-native";
-import { moderateScale } from "react-native-size-matters";
-import { Produto } from "../../models/dto/Produto";
-import { Tema } from "../../styles/styles";
+import React from 'react';
+import { Image, Text, TouchableOpacity, View, StyleSheet } from 'react-native';
+import { moderateScale } from 'react-native-size-matters';
+import { Produto } from '../../models/dto/Produto';
+import { Tema } from '../../styles/styles';
 
 interface Props {
   produto: Produto;
@@ -33,10 +33,10 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderColor: Tema.ROXO,
     borderWidth: 2,
-    flexDirection: "row",
+    flexDirection: 'row'
   },
   imagem: { width: 100, height: 100, marginRight: 20 },
-  descricao: { flex: 1, justifyContent: "space-around" },
-  titulo: { fontSize: moderateScale(16, 0.5), textTransform: "capitalize" },
-  preco: { fontSize: moderateScale(20, 0.5), fontWeight: "bold" },
+  descricao: { flex: 1, justifyContent: 'space-around' },
+  titulo: { fontSize: moderateScale(16, 0.5), textTransform: 'capitalize' },
+  preco: { fontSize: moderateScale(20, 0.5), fontWeight: 'bold' }
 });

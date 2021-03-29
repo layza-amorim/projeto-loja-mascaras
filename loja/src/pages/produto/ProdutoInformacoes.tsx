@@ -1,36 +1,33 @@
-import React, { useEffect, useState } from "react";
-import { useRoute } from "@react-navigation/core";
-import { Tema } from "../../styles/styles";
-import { Container, View } from "native-base";
-import { carregarProduto } from "../../api/api";
-import { Produto } from "../../models/dto/Produto";
-import {ActivityIndicator, Alert, StyleSheet, Text, Image } from "react-native";
-import { moderateScale } from "react-native-size-matters";
+import React, { useEffect, useState } from 'react';
+import { Tema } from '../../styles/styles';
+import { Container, Text } from 'native-base';
+import { carregarProduto } from '../../api/api';
+import { Produto } from '../../models/dto/Produto';
+import { ActivityIndicator, Alert, Image, StyleSheet, View } from 'react-native';
+import { moderateScale } from 'react-native-size-matters';
+import { useProdutoId } from '../../providers/produtoProvider';
 
-const ProdutoDetalhe = () => {
-  const route = useRoute();
-  const { id }: any = route.params;
+const ProdutoInformacoes = () => {
+  const { produtoId } = useProdutoId();
   const [loading, setLoading] = useState(false);
   const [produto, setProduto] = useState<Produto>({} as Produto);
 
   useEffect(() => {
     setLoading(true);
-    carregarProduto(id)
-      .then((produto) => {
+    carregarProduto(produtoId)
+      .then(produto => {
         setLoading(false);
         setProduto(produto);
       })
-      .catch((erro) => {
+      .catch(erro => {
         setLoading(false);
-        Alert.alert("Erro ao carregar os produtos","Por favor, tente novamente em alguns minutos.");
-        console.log("Erro ao carregar produto", erro);
+        Alert.alert('Erro ao carregar os produtos', 'Por favor, tente novamente em alguns minutos.');
+        console.log('Erro ao carregar produto', erro);
       });
   }, []);
 
   if (loading) {
-    return (
-      <ActivityIndicator size="large" style={{ alignSelf: "center", marginTop: 16 }} color={Tema.ROXO}/>
-    );
+    return <ActivityIndicator size="large" style={{ alignSelf: 'center', marginTop: 16 }} color={Tema.ROXO} />;
   }
 
   return (
@@ -52,25 +49,24 @@ const ProdutoDetalhe = () => {
   );
 };
 
-export default ProdutoDetalhe;
+export default ProdutoInformacoes;
 
 const styles = StyleSheet.create({
-  container: { backgroundColor: Tema.FUNDO_CINZA, alignItems: "center" },
+  container: { backgroundColor: Tema.FUNDO_CINZA, alignItems: 'center' },
   tituloBanner: { color: Tema.BRANCO, fontSize: moderateScale(15, 0.5) },
   imagem: { width: 250, height: 250, margin: 20 },
-  bannerEstoque: { backgroundColor: Tema.VERDE_CLARO1, width: "100%", padding: 8 },
+  bannerEstoque: { backgroundColor: Tema.VERDE_CLARO1, width: '100%', padding: 8 },
   titulo: {
     fontSize: moderateScale(22, 0.5),
-    textTransform: "capitalize",
-    fontWeight: "bold",
+    textTransform: 'capitalize',
+    fontWeight: 'bold',
     margin: 20,
     color: Tema.CINZA_ESCURO_HEADER
-
   },
   descricao: {
     fontSize: moderateScale(15, 0.5),
-    textAlign: "justify",
+    textAlign: 'justify',
     margin: 30,
     color: Tema.CINZA_ESCURO_TEXTO
-  },
+  }
 });
