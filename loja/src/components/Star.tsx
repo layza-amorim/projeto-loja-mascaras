@@ -8,43 +8,11 @@ interface Props {
 }
 
 function estrelas(quantidade: number) {
-  let icon = <Icon type="AntDesign" name="star" style={{ color: Tema.AMARELO_AVALIACAO, fontSize: 19 }} />;
-  if (quantidade === 2) {
-    icon = (
-      <>
-        <Icon type="AntDesign" name="star" style={{ color: Tema.AMARELO_AVALIACAO, fontSize: 19 }} />
-        <Icon type="AntDesign" name="star" style={{ color: Tema.AMARELO_AVALIACAO, fontSize: 19 }} />
-      </>
-    );
-  } else if (quantidade === 3) {
-    icon = (
-      <>
-        <Icon type="AntDesign" name="star" style={{ color: Tema.AMARELO_AVALIACAO, fontSize: 19 }} />
-        <Icon type="AntDesign" name="star" style={{ color: Tema.AMARELO_AVALIACAO, fontSize: 19 }} />
-        <Icon type="AntDesign" name="star" style={{ color: Tema.AMARELO_AVALIACAO, fontSize: 19 }} />
-      </>
-    );
-  } else if (quantidade === 4) {
-    icon = (
-      <>
-        <Icon type="AntDesign" name="star" style={{ color: Tema.AMARELO_AVALIACAO, fontSize: 19 }} />
-        <Icon type="AntDesign" name="star" style={{ color: Tema.AMARELO_AVALIACAO, fontSize: 19 }} />
-        <Icon type="AntDesign" name="star" style={{ color: Tema.AMARELO_AVALIACAO, fontSize: 19 }} />
-        <Icon type="AntDesign" name="star" style={{ color: Tema.AMARELO_AVALIACAO, fontSize: 19 }} />
-      </>
-    );
-  } else if (quantidade === 5) {
-    icon = (
-      <>
-        <Icon type="AntDesign" name="star" style={{ color: Tema.AMARELO_AVALIACAO, fontSize: 19 }} />
-        <Icon type="AntDesign" name="star" style={{ color: Tema.AMARELO_AVALIACAO, fontSize: 19 }} />
-        <Icon type="AntDesign" name="star" style={{ color: Tema.AMARELO_AVALIACAO, fontSize: 19 }} />
-        <Icon type="AntDesign" name="star" style={{ color: Tema.AMARELO_AVALIACAO, fontSize: 19 }} />
-        <Icon type="AntDesign" name="star" style={{ color: Tema.AMARELO_AVALIACAO, fontSize: 19 }} />
-      </>
-    );
+  let estrelas = [];
+  for (var i = 0; i < quantidade; i++) {
+    estrelas.push(<Icon type="AntDesign" name="star" style={{ color: Tema.AMARELO_AVALIACAO, fontSize: 19 }} />);
   }
-  return <Text>{icon}</Text>;
+  return <Text>{estrelas}</Text>;
 }
 
 export default function Star({ quantidade }: Props) {

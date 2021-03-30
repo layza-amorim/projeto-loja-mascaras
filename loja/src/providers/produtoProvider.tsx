@@ -11,7 +11,6 @@ export const ProdutoProvider: React.FC = ({ children }: any) => {
   const [produtoId, setProdutoId] = useState<number>({} as number);
 
   const atualizarProdutoId = (id: number) => {
-    console.log(id);
     return setProdutoId(id);
   };
 
