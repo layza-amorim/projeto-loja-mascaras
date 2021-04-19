@@ -10,7 +10,9 @@ interface Props {
 function estrelas(quantidade: number) {
   let estrelas = [];
   for (var i = 0; i < quantidade; i++) {
-    estrelas.push(<Icon type="AntDesign" name="star" style={{ color: Tema.AMARELO_AVALIACAO, fontSize: 19 }} />);
+    estrelas.push(
+      <Icon key={i} type="AntDesign" name="star" style={{ color: Tema.AMARELO_AVALIACAO, fontSize: 19 }} />
+    );
   }
   return <Text>{estrelas}</Text>;
 }
