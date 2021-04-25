@@ -1,5 +1,11 @@
-const express = require("express");
-const app = express();
+var express = require("express");
+var cors = require("cors");
+var { v4: uuidv4 } = require("uuid");
+var app = express();
+var bodyParser = require("body-parser");
+
+app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: true }));
 
 app.listen(3000, () => {
   console.log("Servidor online");
@@ -78,7 +84,7 @@ const produtos = [
   },
 ];
 
-const comentarios = [
+var comentarios = [
   {
     id: 1,
     idProduto: 1,
@@ -155,4 +161,22 @@ app.get("/produtos/:id/comentarios", (req, res) => {
   res.send(
     comentarios.filter((comentario) => comentario.idProduto == req.params.id)
   );
+});
+
+app.delete("/produtos/:idProduto/comentarios/:id", (req, res) => {
+  comentarios = comentarios.filter(
+    (comentario) => comentario.id != req.params.id
+  );
+  res.status(200).end();
+});
+
+app.post("/produtos/:idProduto/comentarios", (req, res) => {
+  const novoComentario = req.body;
+  console.log(req.body);
+  novoComentario.id = uuidv4();
+  novoComentario.idProduto = req.params.idProduto;
+  novoComentario.imagem =
+    "https://i.pinimg.com/736x/bb/e3/02/bbe302ed8d905165577c638e908cec76.jpg";
+  comentarios.push(novoComentario);
+  res.status(200).end();
 });

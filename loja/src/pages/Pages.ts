@@ -6,7 +6,8 @@ export enum ProdutoPages {
   ListagemProdutos = 'ListagemProdutos',
   Produto = 'Produto',
   ProdutoInformacoes = 'ProdutoInformacoes',
-  ProdutoComentarios = 'ProdutoComentarios'
+  ProdutoComentarios = 'ProdutoComentarios',
+  CadastroComentario = 'CadastroComentario'
 }
 
 export enum TabPages {

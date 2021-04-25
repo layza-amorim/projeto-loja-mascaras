@@ -5,10 +5,10 @@ import { carregarProduto } from '../../api/api';
 import { Produto } from '../../models/dto/Produto';
 import { ActivityIndicator, Alert, Image, StyleSheet, View } from 'react-native';
 import { moderateScale } from 'react-native-size-matters';
-import { useProdutoId } from '../../providers/produtoProvider';
+import { useProduto } from '../../providers/produtoProvider';
 
 const ProdutoInformacoes = () => {
-  const { produtoId } = useProdutoId();
+  const { produtoId } = useProduto();
   const [loading, setLoading] = useState(false);
   const [produto, setProduto] = useState<Produto>({} as Produto);
 

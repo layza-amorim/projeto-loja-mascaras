@@ -7,12 +7,12 @@ import { Produto } from '../../models/dto/Produto';
 import { ProdutoPages } from '../Pages';
 import { moderateScale } from 'react-native-size-matters';
 import { useNavigation } from '@react-navigation/core';
-import { useProdutoId } from '../../providers/produtoProvider';
+import { useProduto } from '../../providers/produtoProvider';
 import CardProduto from './CardProduto';
 import SearchBar from '../../components/SearchBar';
 
 const ListagemProdutos = () => {
-  const { atualizarProdutoId } = useProdutoId();
+  const { atualizarProdutoId } = useProduto();
   const navigation = useNavigation();
   const [loading, setLoading] = useState(false);
   const [produtos, setProdutos] = useState<Produto[]>([]);
@@ -41,10 +41,6 @@ const ListagemProdutos = () => {
     }
   };
 
-  if (loading) {
-    return <ActivityIndicator size="large" style={{ alignSelf: 'center', marginTop: 16 }} color={Tema.ROXO} />;
-  }
-
   return (
     <Container style={{ backgroundColor: Tema.FUNDO_CINZA }}>
       <SearchBar
@@ -53,19 +49,23 @@ const ListagemProdutos = () => {
         }}
         placeholder="Buscar produto na loja"
       />
-      <FlatList
-        data={produtosFiltrados}
-        keyExtractor={item => String(item.id)}
-        renderItem={({ item }) => (
-          <CardProduto
-            produto={item}
-            onPress={() => [navigation.navigate(ProdutoPages.Produto), atualizarProdutoId(item.id)]}
-          />
-        )}
-        ListEmptyComponent={
-          <Text style={{ fontSize: moderateScale(14, 0.5), textAlign: 'center' }}>Nenhum produto encontrado</Text>
-        }
-      />
+      {loading ? (
+        <ActivityIndicator size="large" style={{ alignSelf: 'center', marginTop: 16 }} color={Tema.ROXO} />
+      ) : (
+        <FlatList
+          data={produtosFiltrados}
+          keyExtractor={item => String(item.id)}
+          renderItem={({ item }) => (
+            <CardProduto
+              produto={item}
+              onPress={() => [navigation.navigate(ProdutoPages.Produto), atualizarProdutoId(item.id)]}
+            />
+          )}
+          ListEmptyComponent={
+            <Text style={{ fontSize: moderateScale(14, 0.5), textAlign: 'center' }}>Nenhum produto encontrado</Text>
+          }
+        />
+      )}
     </Container>
   );
 };

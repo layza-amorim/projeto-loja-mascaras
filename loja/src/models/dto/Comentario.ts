@@ -1,5 +1,5 @@
 export interface Comentario {
-  id: number;
+  id: number | string;
   idProduto: number;
   nome: string;
   imagem: string;
