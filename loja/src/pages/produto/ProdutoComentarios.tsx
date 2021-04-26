@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Tema } from '../../styles/styles';
 import { Container, Icon } from 'native-base';
 import { ActivityIndicator, Alert, FlatList, Text, TouchableOpacity } from 'react-native';
@@ -14,7 +14,7 @@ import CardComentario from './CardComentario';
 const ProdutoComentarios = () => {
   const navigation = useNavigation();
   const { produtoId } = useProduto();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [comentarios, setcomentarios] = useState<Comentario[]>([]);
   const [comentariosFiltrados, setcomentariosFiltrados] = useState<Comentario[]>([]);
 
@@ -27,29 +27,30 @@ const ProdutoComentarios = () => {
       )
     });
 
-  const apagarComentario = (id: string | number) =>
-    removerComentario(produtoId, id)
-      .then(resposta => reload())
-      .catch(erro => {
-        console.log('Erro ao remover comentário: ', erro);
-        Alert.alert('Erro ao remover comentário', 'Por favor, tente novamente alguns minutos.');
-      });
+  async function apagarComentario(id: string | number) {
+    try {
+      await removerComentario(produtoId, id);
+      reload();
+    } catch (erro) {
+      console.log('Erro ao remover comentário: ', erro);
+      Alert.alert('Erro ao remover comentário', 'Por favor, tente novamente alguns minutos.');
+    }
+  }
 
-  const reload = () => {
-    setLoading(true);
-    adicionarButtonNovoComentario();
-    listarComentarios(produtoId)
-      .then(comentarios => {
-        setLoading(false);
-        setcomentarios(comentarios);
-        setcomentariosFiltrados(comentarios);
-      })
-      .catch(erro => {
-        setLoading(false);
-        Alert.alert('Erro ao carregar os comentarios', 'Por favor, tente novamente em alguns minutos.');
-        console.log('Erro ao carregar comentarios', erro);
-      });
-  };
+  async function reload() {
+    try {
+      setLoading(true);
+      adicionarButtonNovoComentario();
+      let comentarios = await listarComentarios(produtoId);
+      setcomentarios(comentarios);
+      setcomentariosFiltrados(comentarios);
+      setLoading(false);
+    } catch (erro) {
+      setLoading(false);
+      Alert.alert('Erro ao carregar os comentarios', 'Por favor, tente novamente em alguns minutos.');
+      console.log('Erro ao carregar comentarios', erro);
+    }
+  }
 
   useFocusEffect(
     useCallback(() => {

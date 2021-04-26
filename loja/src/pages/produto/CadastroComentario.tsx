@@ -30,26 +30,22 @@ const CadastroComentario = () => {
     adicionarButtonEnviarComentario();
   }, [estrelas, nome, comentario]);
 
-  const adicionarComentario = () => {
-    if (nome.length > 0 && comentario.length > 0 && estrelas > 0) {
-      setLoading(true);
-      cadastrarComentario(produtoId, nome, comentario, estrelas)
-        .then(value => {
-          setLoading(false);
-          navigation.navigate(ProdutoPages.ProdutoComentarios);
-        })
-        .catch(erro => {
-          setLoading(false);
-          setNome('');
-          setComentario('');
-          setEstrelas(0);
-          Alert.alert('Erro ao adicionar comentário', 'Por favor, tente novamente em alguns minutos.');
-          console.log('Erro ao adioncar comentário: ', erro);
-        });
-    } else {
-      Alert.alert('Por favor, preencha todos os campos');
+  async function adicionarComentario() {
+    setLoading(true);
+    try {
+      if (nome.length > 0 && comentario.length > 0 && estrelas > 0) {
+        await cadastrarComentario(produtoId, nome, comentario, estrelas);
+        navigation.navigate(ProdutoPages.ProdutoComentarios);
+        setLoading(false);
+      } else {
+        Alert.alert('Por favor, preencha todos os campos');
+      }
+    } catch (erro) {
+      setLoading(false);
+      Alert.alert('Erro ao carregar os comentarios', 'Por favor, tente novamente em alguns minutos.');
+      console.log('Erro ao carregar comentarios', erro);
     }
-  };
+  }
 
   if (loading) {
     return <ActivityIndicator size="large" style={{ alignSelf: 'center', marginTop: 16 }} color={Tema.ROXO} />;

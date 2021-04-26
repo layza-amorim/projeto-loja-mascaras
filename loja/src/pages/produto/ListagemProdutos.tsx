@@ -12,25 +12,26 @@ import CardProduto from './CardProduto';
 import SearchBar from '../../components/SearchBar';
 
 const ListagemProdutos = () => {
-  const { atualizarProdutoId } = useProduto();
   const navigation = useNavigation();
-  const [loading, setLoading] = useState(false);
+  const { atualizarProdutoId } = useProduto();
+  const [loading, setLoading] = useState(true);
   const [produtos, setProdutos] = useState<Produto[]>([]);
   const [produtosFiltrados, setProdutosFiltrados] = useState<Produto[]>([]);
 
   useEffect(() => {
-    setLoading(true);
-    listarProdutos()
-      .then(produtos => {
-        setLoading(false);
+    async function reload() {
+      try {
+        let produtos = await listarProdutos();
         setProdutos(produtos);
         setProdutosFiltrados(produtos);
-      })
-      .catch(erro => {
+        setLoading(false);
+      } catch (erro) {
         setLoading(false);
         Alert.alert('Erro ao carregar os produtos', 'Por favor, tente novamente em alguns minutos.');
         console.log('Erro ao carregar produtos', erro);
-      });
+      }
+    }
+    reload();
   }, []);
 
   const buscarProdutos = (nome: string) => {
