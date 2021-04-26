@@ -31,9 +31,9 @@ const CadastroComentario = () => {
   }, [estrelas, nome, comentario]);
 
   async function adicionarComentario() {
-    setLoading(true);
     try {
       if (nome.length > 0 && comentario.length > 0 && estrelas > 0) {
+        setLoading(true);
         await cadastrarComentario(produtoId, nome, comentario, estrelas);
         navigation.navigate(ProdutoPages.ProdutoComentarios);
         setLoading(false);
